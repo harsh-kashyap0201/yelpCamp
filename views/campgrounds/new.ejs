@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Camp</title>
-</head>
-<body>
+<% layout('layouts/boilerplate.ejs') %> 
     <form action="/campgrounds/new" method="post">
         <div class="form-group">
             <label for="name">Name</label>
@@ -20,7 +12,7 @@
             <label for="description">Description</label>
             <textarea name="description" id="description" class="form-control"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</body>
-</html>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        </form>

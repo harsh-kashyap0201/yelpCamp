@@ -1,0 +1,14 @@
+<% layout('layouts/boilerplate.ejs') %> 
+<form action="/campgrounds/<%= campground.id%>?_method=PATCH" method="post">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" class="form-control" value="<%= campground.name %>">
+    </div>
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" name="location" id="location" class="form-control" value="<%= campground.location %>">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-sm btn-success">Save Changes</button>
+    </div>
+</form>

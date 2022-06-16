@@ -7,6 +7,8 @@ const Campground= require("./models/campground");
 const ejsMate=require("ejs-mate");
 //method overide to handle patch delete request
 const methodOverride=require('method-override');
+//async wrapper function to handle async errors
+const CatchAsync=require('./utils/catchAsync');
 
 //handling requests other than get and post
 app.use(methodOverride('_method'));
@@ -41,8 +43,8 @@ app.get("/campgrounds/new",(req,res)=>{
 });
 
 //adding new campground to db
-app.post("/campgrounds/new",async(req,res,next)=>{
-    try {
+app.post("/campgrounds/new",CatchAsync(async(req,res,next)=>{
+    
         const campground=new Campground({
             name:req.body.name,
             location:req.body.location,
@@ -52,10 +54,7 @@ app.post("/campgrounds/new",async(req,res,next)=>{
         });
         await campground.save();
         res.redirect("/campgrounds");
-    } catch (error) {
-        next(error)
-    }
-});
+}));
 
 //rendering campground details by id
 app.get("/campgrounds/:id",async(req,res)=>{

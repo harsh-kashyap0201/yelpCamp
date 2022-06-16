@@ -41,13 +41,20 @@ app.get("/campgrounds/new",(req,res)=>{
 });
 
 //adding new campground to db
-app.post("/campgrounds/new",async(req,res)=>{
-    const campground=new Campground({
-        name:req.body.name,
-        location:req.body.location
-    });
-    await campground.save();
-    res.redirect("/campgrounds");
+app.post("/campgrounds/new",async(req,res,next)=>{
+    try {
+        const campground=new Campground({
+            name:req.body.name,
+            location:req.body.location,
+            price:req.body.price,
+            description:req.body.description,
+            image:req.body.image
+        });
+        await campground.save();
+        res.redirect("/campgrounds");
+    } catch (error) {
+        next(error)
+    }
 });
 
 //rendering campground details by id
@@ -63,8 +70,8 @@ app.get("/campgrounds/:id/edit",async(req,res)=>{
 })
 
 //updating campground by id in db
-app.patch("/campgrounds/:id",async(req,res)=>{
-    const campground=await Campground.findByIdAndUpdate(req.params.id,req.body.campground,{runValidators:true});
+app.put("/campgrounds/:id",async(req,res)=>{
+    const campground=await Campground.findByIdAndUpdate(req.params.id,{ ...req.body},{runValidators:true});
     res.redirect("/campgrounds/"+req.params.id);
 })
 
@@ -73,6 +80,10 @@ app.delete("/campgrounds/:id",async(req,res)=>{
     await Campground.findByIdAndDelete(req.params.id);
     res.redirect("/campgrounds");
 });
+
+app.use((err,req,res,next)=>{
+    res.send("something went wrong");
+})
 
 //listening to port 3000
 app.listen(3000,()=>{

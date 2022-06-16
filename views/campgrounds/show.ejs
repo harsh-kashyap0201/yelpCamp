@@ -1,6 +1,19 @@
-<% layout('layouts/boilerplate.ejs') %> 
-
-<h1><%= campground.name %> </h1>
-<p><%= campground.location %> </p> 
-<a href="/campgrounds/<%= campground.id  %>/edit"><button class="btn btn-sm btn-primary">Edit</button></a>
-<form action="/campgrounds/<%=campground.id %>?_method=DELETE" method="post"><button type="submit"  class="btn btn-danger btn-sm">Delete</button></form>
+<% layout('layouts/boilerplate.ejs') %>
+    <div class="container mb-3">
+        <h1 class="text-center">
+            <%= campground.name %>
+        </h1>
+        <img src="<%= campground.image %> " alt="<%= campground.name %>"/>
+        <p>
+            <%= campground.location %>
+        </p>
+        <p>
+            <%= campground.description %>
+        </p>
+        <p>Price: <%= campground.price %>
+        </p>
+        <a href="/campgrounds/<%= campground.id  %>/edit" class="btn btn-sm btn-primary">Edit</a>
+        <form action="/campgrounds/<%=campground.id %>?_method=DELETE" method="post" class="d-inline">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+    </div>

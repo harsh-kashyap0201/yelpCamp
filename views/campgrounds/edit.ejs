@@ -1,14 +1,74 @@
 <% layout('layouts/boilerplate.ejs') %> 
-<form action="/campgrounds/<%= campground.id%>?_method=PATCH" method="post">
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" class="form-control" value="<%= campground.name %>">
-    </div>
-    <div class="form-group">
-        <label for="location">Location</label>
-        <input type="text" name="location" id="location" class="form-control" value="<%= campground.location %>">
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-sm btn-success">Save Changes</button>
-    </div>
-</form>
+<div class="col-5 container my-2 ">
+    <form action="/campgrounds/<%= campground.id%>?_method=PUT" method="post" novalidate class="needs-validation">
+        <div class="form-group mb-3">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control form-control-sm" value="<%= campground.name %>" required>
+            <div class="invalid-feedback">
+                Please provide a valid name.
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location" class="form-control form-control-sm" value="<%= campground.location %>" required>
+            <div class="invalid-feedback">
+                Please provide a valid location.
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" class="form-control form-control-sm" rows="5" required style="resize:none "><%= campground.description %></textarea>
+            <div class="invalid-feedback">
+                Please provide a valid description.
+            </div>
+        </div>
+        <!-- <div class="form-group mb-3">
+            <label for="image" class="form-label">Add images</label>
+            <input class="form-control form-control-sm" type="file" id="image" name="image" multiple>
+        </div> -->
+        <div class="form-group mb-3">
+            <label for="image">Image URL</label>
+            <input type="text" name="image" id="location" class="form-control form-control-sm" value="<%= campground.image %>" required>
+            <div class="invalid-feedback">
+                Please provide a valid image URL.
+            </div>
+        </div>
+    
+        <div class="form-group mb-3">
+            <label for="price" class="form-label">Price</label>
+            <div class="input-group mb-3">
+                <div class="input-group-text">$</div>
+                <input type="number" class="form-control" id="price" name="price" value="<%= campground.price %>" required>
+                <div class="invalid-feedback">
+                    Please provide a valid Price.
+                </div>
+            </div>
+        </div>
+    
+        <div class="form-group mb-3">
+            <button type="submit" class="btn btn-sm btn-success">Add Campground</button>
+        </div>
+    </form>
+</div>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>

@@ -32,10 +32,10 @@ app.get("/",(req,res)=>{
 });
 
 //rendering all campgrounds
-app.get("/campgrounds",async(req,res)=>{
+app.get("/campgrounds",CatchAsync(async(req,res)=>{
     const campgrounds=await Campground.find({});
     res.render("./campgrounds/campground.ejs",{campgrounds:campgrounds});
-});
+}));
 
 //rendering add new campground form
 app.get("/campgrounds/new",(req,res)=>{
@@ -57,28 +57,28 @@ app.post("/campgrounds/new",CatchAsync(async(req,res,next)=>{
 }));
 
 //rendering campground details by id
-app.get("/campgrounds/:id",async(req,res)=>{
+app.get("/campgrounds/:id",CatchAsync(async(req,res)=>{
     const campground=await Campground.findById(req.params.id);
     res.render("./campgrounds/show.ejs",{campground:campground});
-})
+}));
 
 //rendering edit camground form
-app.get("/campgrounds/:id/edit",async(req,res)=>{
+app.get("/campgrounds/:id/edit",CatchAsync(async(req,res)=>{
     const campground=await Campground.findById(req.params.id);
     res.render("./campgrounds/edit.ejs",{campground:campground});
-})
+}))
 
 //updating campground by id in db
-app.put("/campgrounds/:id",async(req,res)=>{
+app.put("/campgrounds/:id",CatchAsync(async(req,res)=>{
     const campground=await Campground.findByIdAndUpdate(req.params.id,{ ...req.body},{runValidators:true});
     res.redirect("/campgrounds/"+req.params.id);
-})
+}))
 
 //deleting campground by id in db
-app.delete("/campgrounds/:id",async(req,res)=>{
+app.delete("/campgrounds/:id",CatchAsync(async(req,res)=>{
     await Campground.findByIdAndDelete(req.params.id);
     res.redirect("/campgrounds");
-});
+}));
 
 app.use((err,req,res,next)=>{
     res.send("something went wrong");

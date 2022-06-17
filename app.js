@@ -9,6 +9,8 @@ const ejsMate=require("ejs-mate");
 const methodOverride=require('method-override');
 //async wrapper function to handle async errors
 const CatchAsync=require('./utils/catchAsync');
+//handling errors
+const ExpressError=require('./utils/ExpressError');
 
 //handling requests other than get and post
 app.use(methodOverride('_method'));
@@ -80,8 +82,15 @@ app.delete("/campgrounds/:id",CatchAsync(async(req,res)=>{
     res.redirect("/campgrounds");
 }));
 
+//handling error if req doesnt match
+app.all("*",(req,res,next)=>{
+    next(new ExpressError("Page not found",404));
+});
+
+
 app.use((err,req,res,next)=>{
-    res.send("something went wrong");
+    const {statusCode=500,message="Something Went Wrong!! "}=err;
+    res.status(statusCode).render("./campgrounds/error.ejs",{message:message});
 })
 
 //listening to port 3000

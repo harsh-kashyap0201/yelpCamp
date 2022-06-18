@@ -1,20 +1,33 @@
 <% layout('layouts/boilerplate.ejs') %>
-    <div class="container mb-3">
-        <h1 class="text-center">
-            <%= campground.name %>
-        </h1>
-        <img src="<%= campground.image %> " alt="<%= campground.name %>"/>
-        <p>
-            <%= campground.location %>
-        </p>
-        <p>
-            <%= campground.description %>
-        </p>
-        <p>Price: <%= campground.price %>
-        </p>
-        <a href="/campgrounds/<%= campground.id  %>/edit" class="btn btn-sm btn-primary">Edit</a>
-        <form action="/campgrounds/<%=campground.id %>?_method=DELETE" method="post" class="d-inline">
-            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-        </form>
-        <a href="/campgrounds" class="btn btn-light btn-sm">Back</a>
+<div class="container col-5 my-3">
+    <div class="card">
+        <img src="<%= campground.image %> " class="card-img-top" style="width: 100%; height:50vh;" alt="<%= campground.name %>">
+        <div class="card-body">
+            <h5 class="card-title"><%= campground.name %></h5>
+            <h6 class="card-title"><%= campground.location %></h6>
+            <p class="card-text"><%= campground.description %>.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Price: <%= campground.price %></li>
+            <li class="list-group-item">
+                <form action="" method="post">
+                    <label for="customRange3" class="form-label">Rating</label>
+                    <input type="range" name="rating" class="form-range" min="0" max="5" step="1" id="customRange3">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a review here" id="floatingTextarea" name="review"
+                            rows="5" style="resize: none;"></textarea>
+                        <label class="form-label" for="floatingTextarea">Review</label>
+                    </div>
+                </form>
+            </li>
+        </ul>
+        <div class="card-body">
+            <a href="/campgrounds/<%= campground.id  %>/edit" class="btn btn-sm btn-primary">Edit</a>
+            <form action="/campgrounds/<%=campground.id %>?_method=DELETE" method="post" class="d-inline">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+            <a href="/campgrounds" class="btn btn-light btn-sm">Back</a>
+        </div>
     </div>
+</div>
+    

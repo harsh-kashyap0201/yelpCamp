@@ -1,4 +1,7 @@
 <% layout('layouts/boilerplate.ejs') %> 
+<script>
+    document.title = "YelpCamp | Edit Campground📝";
+</script>
 <div class="col-5 container my-2 ">
     <form action="/campgrounds/<%= campground.id%>?_method=PUT" method="post" novalidate class="needs-validation">
         <div class="form-group mb-3">

@@ -34,6 +34,9 @@ body{
     font-weight: bold;
     line-height: 10vh;
 }
+.red{
+  color:#7CF205;
+}
 .startContainer{
     background-color: rgba(0,0,0,0.5);
     padding: 2%;
@@ -41,7 +44,7 @@ body{
 }
 .sub-main{
     width: 30%;
-
+    height: 10%;
 }
 
 .buttonStarted{

@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
+.navbar{
+    background-color: #0B040D;
+    /* width: 100vw; */
+    margin: 0;
+}
+.navbar-brand{
+    font-size: 1.5em;
+    font-family: 'Pacifico', cursive;
+    color: #E71D36;
+    font-weight: 200;
+}
+.navbar-brand:hover{
+    color: #F2A007;
+}
+.nav-link{
+    color: #FFFFFF;
+    font-size: 1.2em;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    font-weight: 200;
+}
+.active{
+    color: #F2A007;
+}
+.nav-link:hover{
+    color: #F2A007;
+}
+.nav-link:active{
+    color: #F2A007;
+}
+.navbar-link > .active  a{
+    color: #F2A007;
+}
+
+.login{
+    color:#FFFFFF;
+}
+.login:hover{
+    color: #F2A007;
+}

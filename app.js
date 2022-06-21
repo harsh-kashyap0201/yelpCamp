@@ -12,7 +12,6 @@ const methodOverride=require('method-override');
 const CatchAsync=require('./utils/catchAsync');
 //handling errors
 const ExpressError=require('./utils/ExpressError');
-const catchAsync = require("./utils/catchAsync");
 
 app.use(express.static(path.join(__dirname, 'views')));
 
@@ -25,7 +24,7 @@ mongoose.connect("mongodb://localhost:27017/yelp_camp").then(()=>{
     console.log("Error:",err.message);
 }); 
 
-app.engine  ('ejs',ejsMate);
+app.engine ('ejs',ejsMate);
 app.set('view engine', "ejs");
 app.set('views',path.join(__dirname,"views"));
 
@@ -37,53 +36,9 @@ app.get("/",(req,res)=>{
     res.render("home.ejs");
 });
 
-//rendering all campgrounds
-app.get("/campgrounds",CatchAsync(async(req,res)=>{
-    const campgrounds=await Campground.find({});
-    res.render("./campgrounds/campground.ejs",{campgrounds:campgrounds});
-}));
-
-//rendering add new campground form
-app.get("/campgrounds/new",(req,res)=>{
-    res.render("./campgrounds/new.ejs");
-});
-
-//adding new campground to db
-app.post("/campgrounds/new",CatchAsync(async(req,res,next)=>{
-        const campground=new Campground({
-            name:req.body.name,
-            location:req.body.location,
-            price:req.body.price,
-            description:req.body.description,
-            image:req.body.image
-        });
-        await campground.save();
-        res.redirect("/campgrounds");
-}));
-
-//rendering campground details by id
-app.get("/campgrounds/:id",CatchAsync(async(req,res)=>{
-    const campground=await Campground.findById(req.params.id).populate("reviews");
-    res.render("./campgrounds/show.ejs",{campground:campground});
-}));
-
-//rendering edit camground form
-app.get("/campgrounds/:id/edit",CatchAsync(async(req,res)=>{
-    const campground=await Campground.findById(req.params.id);
-    res.render("./campgrounds/edit.ejs",{campground:campground});
-}))
-
-//updating campground by id in db
-app.put("/campgrounds/:id",CatchAsync(async(req,res)=>{
-    const campground=await Campground.findByIdAndUpdate(req.params.id,{ ...req.body},{runValidators:true});
-    res.redirect("/campgrounds/"+req.params.id);
-}))
-
-//deleting campground by id in db
-app.delete("/campgrounds/:id",CatchAsync(async(req,res)=>{
-    await Campground.findByIdAndDelete(req.params.id);
-    res.redirect("/campgrounds");
-}));
+//campground routes
+const campgroundRoute=require("./routes/campgroundRoute");
+app.use("/campgrounds",campgroundRoute);
 
 //adding reviews
 app.post("/campgrounds/:id/reviews",CatchAsync(async(req,res)=>{
@@ -99,7 +54,7 @@ app.post("/campgrounds/:id/reviews",CatchAsync(async(req,res)=>{
 }));    
 
 //delete review
-app.delete("/campgrounds/:id/reviews/:reviewId",catchAsync(async(req,res)=>{
+app.delete("/campgrounds/:id/reviews/:reviewId",CatchAsync(async(req,res)=>{
     const {id,reviewId}=req.params;
     await Campground.findByIdAndUpdate(id,{$pull:{reviews:{id:reviewId}}});
     await Review.findByIdAndDelete(reviewId);

@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+body{
+    background:url("https://rare-gallery.com/thumbs/340236-Digital-Art-Camping-Car-Road-Sunset-Scenery.jpg");
+    /* background-image: url("https://www.xtrafondos.com/en/descargar.php?id=4676&resolucion=2560x1440"); */
+    /* background: url("https://i.pinimg.com/originals/75/cb/a1/75cba1f28d5a87d88c99228cdf2a333e.jpg"); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;   
+}
+.formBox{
+background: rgba(242, 227, 213, 0.15);
+
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(2.8px);
+-webkit-backdrop-filter: blur(2.8px);
+    padding: 2vw;
+    width: 40vw;
+}
+.heading{
+    color: #120F24;
+    text-align: center;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 3    .5em;
+    font-family: 'Staatliches', cursive;
+    background-color: #FE3057;
+    padding: 1vw;
+}
+.form-control{
+    background-color: rgba(256, 256,256,0.3);
+    color: #0B040D;
+    
+    border: none;
+    font-size: 1em;
+    font-family: 'Noto Sans', sans-serif;
+
+}
+.form-control:focus{
+    background-color: rgba(256, 256,256,0.3);
+}
+.form-control::placeholder{
+    color: #0B040D; 
+}
+.formText{
+    color: #120F24;
+    font-size: 1.05em;
+    font-weight: 800;
+    font-family: 'Noto Sans', sans-serif;
+}
+.currency{
+    background-color: #E71D36;
+    color: #D2C9E8;
+    border-color: #E71D36;
+    
+}

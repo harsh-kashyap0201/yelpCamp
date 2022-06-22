@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 body{
     background: url("https://img3.goodfon.com/wallpaper/nbig/7/7a/gory-noch-nebo-zvezdy-mlechnyi-put-palatka-svet.jpg");
     background-repeat: no-repeat;
@@ -19,11 +20,13 @@ body{
     padding: 0 20px;
     /* box-shadow: 0px 0px 10px rgba(0,0,0,0.1); */
     color: aliceblue;
+    margin-top: 2vh;
 }
 .navbar-brand{
-    color: aliceblue;
-    font-size: 30px;
-    font-weight: bold;
+  font-size: 1.9em;
+  font-family: 'Pacifico', cursive;
+  color: #E71D36;
+  font-weight: 200;
 }
 .navbar-brand:hover{
     color: aliceblue;

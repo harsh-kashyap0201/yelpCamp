@@ -12,6 +12,10 @@ const methodOverride=require('method-override');
 const CatchAsync=require('./utils/catchAsync');
 //handling errors
 const ExpressError=require('./utils/ExpressError');
+//session management
+const session=require('express-session');
+//flash messages
+const flash=require('connect-flash');
 
 app.use(express.static(path.join(__dirname, 'views')));
 
@@ -31,6 +35,30 @@ app.set('views',path.join(__dirname,"views"));
 //parsing incoming request body to json
 app.use(express.urlencoded({extended:true}));
 
+//session config
+const sessionConfig={
+    secret: "secretkeyforsession",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 1000*60*60*24*7,
+        httpOnly: true
+        
+    }   
+};
+
+app.use(session(sessionConfig));
+app.use(flash());
+
+app.use((req,res,next)=>{
+    res.locals.success=req.flash("success");
+    next();
+});
+app.use((req,res,next)=>{
+    res.locals.error=req.flash("error");
+    next();
+})
+
 //rendering homepage
 app.get("/",(req,res)=>{
     res.render("home.ejs");
@@ -40,33 +68,16 @@ app.get("/",(req,res)=>{
 const campgroundRoute=require("./routes/campgroundRoute");
 app.use("/campgrounds",campgroundRoute);
 
-//adding reviews
-app.post("/campgrounds/:id/reviews",CatchAsync(async(req,res)=>{
-    const campground=await Campground.findById(req.params.id);
-    const review=new Review({
-        review:req.body.review,
-        rating:req.body.rating
-    });
-    campground.reviews.push(review);
-    await review.save();
-    await campground.save();
-    res.redirect("/campgrounds/"+req.params.id);
-}));    
-
-//delete review
-app.delete("/campgrounds/:id/reviews/:reviewId",CatchAsync(async(req,res)=>{
-    const {id,reviewId}=req.params;
-    await Campground.findByIdAndUpdate(id,{$pull:{reviews:{id:reviewId}}});
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect("/campgrounds/"+id);
-}));
+//review routes
+const reviewsRoute=require("./routes/reviewsRoute");
+app.use("/campgrounds/:id/reviews",reviewsRoute);
 
 //handling error if req doesnt match
 app.all("*",(req,res,next)=>{
     next(new ExpressError("Page not found",404));
 });
 
-
+//handling error
 app.use((err,req,res,next)=>{
     const {statusCode=500,message="Something Went Wrong!! "}=err;
     res.status(statusCode).render("./campgrounds/error.ejs",{message:message});

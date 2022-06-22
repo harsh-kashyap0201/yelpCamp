@@ -1,0 +1,13 @@
+<% if(success.length) {%> 
+    <div class="alert my-3 alert-success alert-dismissible fade show" tabindex="-1" role="alert" style="z-index:9999; position:fixed; margin-left: 70vw;" >
+        <strong><%= success %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %> 
+
+<% if(error.length) {%> 
+    <div class="alert my-3 alert-danger alert-dismissible fade show" tabindex="-1" role="alert" style="z-index:9999; position:fixed; margin-left: 70vw;" >
+        <strong><%= error %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %> 

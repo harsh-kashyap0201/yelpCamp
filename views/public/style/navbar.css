@@ -8,6 +8,7 @@
     margin-left: 2vw;
     margin-right: 2vw;
 }
+
 .navbar-brand{
     font-size: 1.7em;
     font-family: 'Pacifico', cursive;
@@ -23,6 +24,7 @@
     font-family: 'Kdam Thmor Pro', sans-serif;
     font-weight: 200;
 }
+
 .active{
     color: #F2A007;
 }

@@ -1,8 +1,9 @@
 .topSection{
     height: 99vh; 
     background-color: #ffff; 
-
+    margin-top: 0;
     margin-bottom: 5vh;
+    position: relative;
 }
 
 .navbarSection{

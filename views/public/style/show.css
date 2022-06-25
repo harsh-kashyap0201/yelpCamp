@@ -1,0 +1,20 @@
+body{
+    background: url("https://wallpaperaccess.com/full/244206.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+}
+.review{
+    color: aliceblue;
+    /* From https://css.glass */
+    background: rgba(1, 1, 1, 0.14);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
+    margin-top: 1vh;
+    min-height: 40vh;
+    padding: 2vh;
+}

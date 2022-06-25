@@ -2,16 +2,7 @@
 <script>
     document.title = "YelpCamp | <%- campground.name %>🏕️";
 </script>
-<style>
-    body{
-        background: url("https://wallpaperaccess.com/full/244206.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-        height: 100vh;
-    }
-</style>
+<link rel="stylesheet" href="../public/style/show.css">
 <div class=" d-flex justify-content-center">
     <div class="mx-3 my-5 col-5 ">
         <div class="card">
@@ -38,7 +29,7 @@
         </div>
             
     </div>
-    <div class="mx-3 my-5 col-5 ">
+    <div class=" mx-3 my-5 col-5 ">
         <div class="card">
             <div class="card-body">
                 <h2>Leave a Review</h2>
@@ -55,7 +46,8 @@
             </div>
         </div>
         <hr>
-        <h2>Reviews</h2>
+        <div class="review">
+            <h2>Reviews</h2>
         <% if(campground.reviews.length > 0) { %>
         <% for(let review of campground.reviews) { %>
         <div class="card my-2">
@@ -81,6 +73,7 @@
         <% } else { %>
             <p>No reviews yet</p>
         <% } %>
+        </div>
     </div>
 </div>
 <script src="../public/js/clientvalidation.js"></script>

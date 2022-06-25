@@ -16,7 +16,13 @@
                         <div class="col-md-8 p-4">
                             <h2><%= camp.name %></h2>
                             <p><i class="fa fa-map-marker" aria-hidden="true"></i> <%= camp.location %></p>
-                            <p><%= camp.description %></p>
+                            <p><% if (camp.description.length>200) { %>
+                                    <%= camp.description.substring(0,200) %>...
+                            <% } else {%>
+                                    <%= camp.description %>
+                            <% } %></p>
+                            </p>
+
                             <a href="/campgrounds/<%= camp.id %>"><button class="btn btm-sm buttonInfo">More Info</button></a>
                         </div>
                     </div>

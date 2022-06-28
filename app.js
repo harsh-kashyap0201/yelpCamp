@@ -16,6 +16,9 @@ const ExpressError=require('./utils/ExpressError');
 const session=require('express-session');
 //flash messages
 const flash=require('connect-flash');
+const passport=require('passport');
+const localStartegy=require('passport-local');
+const User=require('./models/user');
 
 app.use(express.static(path.join(__dirname, 'views')));
 
@@ -49,6 +52,12 @@ const sessionConfig={
 
 app.use(session(sessionConfig));
 app.use(flash());
+//initializing passport
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStartegy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
@@ -57,7 +66,7 @@ app.use((req,res,next)=>{
 app.use((req,res,next)=>{
     res.locals.error=req.flash("error");
     next();
-})
+});
 
 //rendering homepage
 app.get("/",(req,res)=>{
@@ -71,6 +80,10 @@ app.use("/campgrounds",campgroundRoute);
 //review routes
 const reviewsRoute=require("./routes/reviewsRoute");
 app.use("/campgrounds/:id/reviews",reviewsRoute);
+
+//user routes
+const userRoute=require("./routes/userRoute")
+app.use("/",userRoute)
 
 //handling error if req doesnt match
 app.all("*",(req,res,next)=>{

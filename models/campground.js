@@ -7,10 +7,10 @@ campGroundSchema=new Schema({
     description:String,
     location:String,
     image:String,
-    author:[{
+    author:{
         type:Schema.Types.ObjectId,
         ref:"User"
-    }],
+    },
     reviews: [{
         type: Schema.Types.ObjectId,
         ref: 'Review'

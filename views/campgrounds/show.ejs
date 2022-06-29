@@ -3,6 +3,7 @@
     document.title = "YelpCamp | <%- campground.name %>🏕️";
 </script>
 <link rel="stylesheet" href="../public/style/show.css">
+<link rel="stylesheet" href="../public/style/star.css">
 <div class=" d-flex justify-content-center">
     <div class="mx-3 my-5 col-5 ">
         <div class="card">
@@ -35,16 +36,27 @@
         </div>
             
     </div>
-    <div class=" mx-3 my-5 col-5 ">
+    <div class="mx-3 my-5 col-5 ">
         <% if(currentUser){ %>
             <div class="card">
                 <div class="card-body">
                     <h2>Leave a Review</h2>
                 <form action="/campgrounds/<%= campground.id  %>/reviews" method="post" novalidate class="needs-validation">
-                    <label for="customRange3" class="form-label">Rating</label>
-                    <input type="range" name="rating" class="form-range" min="0" max="5" step="1" id="customRange3" value="0" maxlength="50%" required>
-                    <label class="form-label" for="floatingTextarea">Review</label>
-                    <textarea class="form-control" placeholder="Leave a review here" id="floatingTextarea" name="review" rows="5" style="resize: none;" required></textarea>
+                    <fieldset class="starability-heartbeat">
+                        <legend>Rating:</legend>
+                        <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                        <input type="radio" id="first-rate1" name="rating" value="1" />
+                        <label for="first-rate1" title="Terrible">1 star</label>
+                        <input type="radio" id="first-rate2" name="rating" value="2" />
+                        <label for="first-rate2" title="Not good">2 stars</label>
+                        <input type="radio" id="first-rate3" name="rating" value="3" />
+                        <label for="first-rate3" title="Average">3 stars</label>
+                        <input type="radio" id="first-rate4" name="rating" value="4" />
+                        <label for="first-rate4" title="Very good">4 stars</label>
+                        <input type="radio" id="first-rate5" name="rating" value="5" />
+                        <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>
+                    <textarea class="form-control my-2" placeholder="Leave a review here" id="floatingTextarea" name="review" rows="5" style="resize: none;" required></textarea>
                     <div class="invalid-feedback">
                         Please provide a valid review.
                     </div>
@@ -60,20 +72,10 @@
         <% for(let review of campground.reviews) { %>
         <div class="card my-2">
             <div class="card-body">
-                <h5 class="card-title">Rating : 
-                    <% if (review.rating === 0) { %>
-                        <% for( let index = 0; index < 5; index++ ) { %>
-                            <i class="fas fa-star"></i>
-                        <% } %>
-                    <% } else{ %>
-                        <% for( let index = 0; index < review.rating; index++ ) { %>
-                            ⭐️
-                        <% } %>
-                        <% for( let index = 0; index < 5 - review.rating; index++ ) { %>
-                            <i class="fas fa-s  tar"></i>
-                        <% } %>
-                    <% } %>
-                <h6 class="card-subtitle mb-2 text-muted"><%= review.author.username %> </h6>
+                <h4 class="card-title mb-2"><%= review.author.username %> </h4>
+                    <p class="starability-result" data-rating=<%= review.rating %>>
+                        Rated: 3 <%= review.rating %>
+                    </p>
                 <p class="card-text"><%= review.review %></p>
                 <% if(currentUser && currentUser.equals(review.author._id)) { %> 
                 <form action="/campgrounds/<%= campground.id %>/reviews/<%= review.id %>?_method=DELETE" method="post"><button class="btn btn-danger btn-sm" type="submit">Delete review</button></form>

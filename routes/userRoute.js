@@ -8,7 +8,7 @@ router.get("/signup",(req,res)=>{
     res.render("users/signup");
 });
 
-router.post("/signup",CatchAsync(async(req,res)=>{
+router.post("/signup",CatchAsync(async(req,res,next)=>{
     try {
         const {username , email, password}=req.body;
         const newUser=new User({
@@ -16,9 +16,16 @@ router.post("/signup",CatchAsync(async(req,res)=>{
             email
         });
         const registeredUser=await User.register(newUser,password);
-        console.log(registeredUser);
-        req.flash("success","You are registered and can log in");
-        res.redirect("/campgrounds");
+        req.login(registeredUser,(err)=>{
+            if(err){
+                return next(err);
+            }
+            req.flash("success","You are registered and logged in");
+            const returnTo=req.session.returnTo || "/campgrounds";
+            
+            res.redirect(returnTo);
+        });
+        
     } catch (error) {
         req.flash("error",error.message);
         res.redirect("/campgrounds");
@@ -28,11 +35,24 @@ router.post("/signup",CatchAsync(async(req,res)=>{
 //login route
 router.get("/login",(req,res)=>{
     res.render("users/login");
+    // console.log(req.session);
 });
 
 router.post("/login",passport.authenticate('local',{failureFlash: true,failureRedirect: '/login'}),CatchAsync(async(req,res)=>{
+    const returnTo=req.session.returnTo || "/campgrounds";
     req.flash("success","You are logged in");
-    res.redirect("/campgrounds");
+    // console.log(req.session);
+    res.redirect(returnTo);
+    
 }));
+
+//logout route
+router.get("/logout",(req,res,next)=>{
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        req.flash('success', 'You are logged out');
+        res.redirect('/campgrounds');
+    });
+});
 
 module.exports=router;

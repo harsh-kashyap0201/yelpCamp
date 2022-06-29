@@ -43,6 +43,7 @@ const sessionConfig={
     secret: "secretkeyforsession",
     resave: false,
     saveUninitialized: true,
+    signed:true,
     cookie: {
         maxAge: 1000*60*60*24*7,
         httpOnly: true
@@ -60,13 +61,12 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>{
+    res.locals.currentUser=req.user;
     res.locals.success=req.flash("success");
-    next();
-});
-app.use((req,res,next)=>{
     res.locals.error=req.flash("error");
     next();
 });
+
 
 //rendering homepage
 app.get("/",(req,res)=>{

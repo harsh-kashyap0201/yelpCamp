@@ -17,7 +17,7 @@
     <div class="col-5 container my-2 formBox">
         <h2 class="text-center heading">EDIT CAMPGROUND</h2>
         <hr>
-        <form action="/campgrounds/<%= campground.id%>?_method=PUT" method="post" novalidate class="needs-validation">
+        <form action="/campgrounds/<%= campground.id%>?_method=PUT" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
             <div class="form-group mb-3">
                 <label for="name" class="formText ">Name</label>
                 <input type="text" name="name" id="name" class="form-control form-control-sm"
@@ -42,19 +42,10 @@
                     Please provide a valid description.
                 </div>
             </div>
-            <!-- <div class="form-group mb-3">
-            <label for="image" class="form-label">Add images</label>
-            <input class="form-control form-control-sm" type="file" id="image" name="image" multiple>
-        </div> -->
             <div class="form-group mb-3">
-                <label for="image" class="formText ">Image URL</label>
-                <input type="text" name="image" id="location" class="form-control form-control-sm"
-                    value="<%= campground.image %>" required>
-                <div class="invalid-feedback">
-                    Please provide a valid image URL.
-                </div>
+                <label for="image" class="form-label">Add images</label>
+                <input class="form-control form-control-sm" type="file" id="image" name="image" multiple>
             </div>
-
             <div class="form-group mb-3">
                 <label for="price" class="formText " class="form-label">Price</label>
                 <div class="input-group mb-3">
@@ -65,6 +56,16 @@
                         Please provide a valid Price.
                     </div>
                 </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <% for(let i=0;i<campground.images.length;i++) {%>
+                <img src="<%= campground.images[i].url %>" class="img-thumbnail mb-1" alt="<%= campground.name %>" style="width: 30%;">
+                <div class="form-check-inline">
+                    <input type="checkbox" name="deleteimg[]" id="image-<%= i %>" value="<%= campground.images[i].filename%>">
+                    <label for="image-<%= i %>">Delete</label>
+                </div>
+                <% } %>
             </div>
 
             <div class="form-group mb-3">

@@ -1,4 +1,5 @@
 const Campground= require("../models/campground");
+const {cloudinary}=require("../cloudinary/config");
 
 module.exports.index=async(req,res)=>{
     const campgrounds=await Campground.find({});
@@ -10,12 +11,18 @@ module.exports.renderNewForm=(req,res)=>{
 }
 
 module.exports.addNewCampground=async(req,res,next)=>{
+    const imgs=req.files.map(f=>({url:f.path,filename:f.filename}));
+    for (let i = 0; i< imgs.length; i++) {
+        if(imgs[i].size>5000){
+            return req.flash("error","Image size should be less than 5MB");
+        }
+    }
     const campground=new Campground({
         name:req.body.name,
         location:req.body.location,
         price:req.body.price,
         description:req.body.description,
-        image:req.body.image
+        images:imgs
     });
     campground.author=req.user._id;
     await campground.save();
@@ -49,6 +56,16 @@ module.exports.renderEditForm=async(req,res)=>{
 
 module.exports.updateCampground=async(req,res)=>{
     const campground=await Campground.findByIdAndUpdate(req.params.id,{ ...req.body},{runValidators:true});
+    const imgs=req.files.map(f=>({url:f.path,filename:f.filename}));
+    campground.images.push(...imgs);
+    await campground.save();
+    if(req.body.deleteimg){
+        for (let i =0;i<req.body.deleteimg.length;i++) {
+            const filename=req.body.deleteimg[i];
+            await cloudinary.uploader.destroy(filename);
+        }
+        await campground.updateOne({$pull:{images:{filename:{ $in:req.body.deleteimg}}}});
+    }
     req.flash("success","Campground Updated Successfully");
     res.redirect("/campgrounds/"+req.params.id);
 }

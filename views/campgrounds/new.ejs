@@ -3,7 +3,7 @@
     <script>
         document.title = "YelpCamp | New Campground🆕";
     </script>
-    <div class="col-5 container my-2  formBox  ">
+    <div class="col-5 container my-2 formBox ">
         <h2 class="text-center heading">NEW CAMPGROUND</h2>
         <hr>
         <form action="/campgrounds/new" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
@@ -37,7 +37,7 @@
                 <label for="price" class="formText" >Price</label>
                 <div class="input-group form-group mb-3">
                     <div class="input-group-text formText currency">$</div>
-                    <input type="text" class="form-control form-control-sm" id="price" name="price" placeholder="00.00" required>
+                    <input type="number" class="form-control form-control-sm" id="price" name="price" placeholder="00.00" required>
                     <div class="invalid-feedback">
                         Please provide a valid Price.
                     </div>

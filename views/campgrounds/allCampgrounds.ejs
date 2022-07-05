@@ -1,0 +1,46 @@
+<% layout('layouts/boilerplate.ejs') %> 
+<script>
+    document.title = "YelpCamp | All Campgrounds🏕️";
+</script>
+<link rel="stylesheet" href="../public/style/index.css">
+
+<div class="campground">
+    <div id="map"></div>
+    <center><span class="headingTag">ALL CAMPGROUNDS⛺</span>
+        <hr></center>
+    <div class="row mx-0 justify-content-center">
+        
+        <% for (let camp of campgrounds) { %>
+            <div class="card col-md-6 mx-2 my-3" >
+                <% if(camp.images.length>0) {%> 
+                    <img src="<%= camp.images[0].url %>" alt="<%= camp.name %>" >
+                    <% } else {%>
+                    <img src="https://res.cloudinary.com/dupbox21b/image/upload/v1657031782/yelpcampAssets/no-image-available-vector-hand-260nw-745639717_an0gep.webp" alt="<%= camp.name %>" style="width: 100%;">
+                    <% } %>
+                <div class="card-body">
+                    <h2><%= camp.name %> </h2>
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> <%= camp.location %></p>
+                            <p><% if (camp.description.length>200) { %>
+    
+                                    <%= camp.description.substring(0,200) %>...
+                            <% } else {%>
+                                    <%= camp.description %>
+                                    
+                            <% } %></p>
+                            </p>
+                            <a href="/campgrounds/<%= camp.id %>"><button class="btn btm-sm buttonInfo">More Info</button></a>
+                </div>
+            </div>
+          
+            
+    <% } %>
+
+    </div>
+</div>
+<script>
+    const mapboxpk='<%- process.env.mapbox_token%>'
+    const Campgrounds={features:<%- JSON.stringify(campgrounds) %>};
+    
+
+</script>
+<script src="../public/js/indexmap.js"></script>

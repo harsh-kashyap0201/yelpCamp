@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 body{
-    background:url("https://rare-gallery.com/thumbs/340236-Digital-Art-Camping-Car-Road-Sunset-Scenery.jpg");
-    /* background-image: url("https://www.xtrafondos.com/en/descargar.php?id=4676&resolucion=2560x1440"); */
-    /* background: url("https://i.pinimg.com/originals/75/cb/a1/75cba1f28d5a87d88c99228cdf2a333e.jpg"); */
+    background:url("https://res.cloudinary.com/dupbox21b/image/upload/v1657032231/yelpcampAssets/340236-Digital-Art-Camping-Car-Road-Sunset-Scenery_1_chfyp5.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

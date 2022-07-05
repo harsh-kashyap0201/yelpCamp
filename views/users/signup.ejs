@@ -3,37 +3,43 @@
         document.title = "YelpCamp | Signup🆕";
     </script>
     <link rel="stylesheet" href="/../public/style/new.css">
-
-    <div class="col-5 container my-2  formBox">
-        <h2 class="text-center heading">SignUp</h2>
-        <hr>
-        <form action="/signup" method="post" novalidate class="needs-validation">
-            <div class="form-group mb-3">
-                <label for="username" class="formText">Name</label>
-                <input type="text" name="username" id="username" class="form-control form-control-sm" required>
-                <div class="invalid-feedback">
-                    Please provide a valid name.
+    <style>
+        .new{
+            height: 100%;
+        }
+    </style>
+    <div class="new">
+        <div class="col-5 container my-2  formBox">
+            <h2 class="text-center heading">SignUp</h2>
+            <hr>
+            <form action="/signup" method="post" novalidate class="needs-validation">
+                <div class="form-group mb-3">
+                    <label for="username" class="formText">Name</label>
+                    <input type="text" name="username" id="username" class="form-control form-control-sm" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid name.
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3">
-                <label for="email" class="formText">Email</label>
-                <input type="email" name="email" id="email" class="form-control form-control-sm" required>
-                <div class="invalid-feedback">
-                    Please provide a valid email.
+                <div class="form-group mb-3">
+                    <label for="email" class="formText">Email</label>
+                    <input type="email" name="email" id="email" class="form-control form-control-sm" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid email.
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3">
-                <label for="location" class="formText">Password</label>
-                <input type="password" name="password" id="password" class="form-control form-control-sm" required>
-                <div class="invalid-feedback">
-                    Please provide a valid password.
+                <div class="form-group mb-3">
+                    <label for="location" class="formText">Password</label>
+                    <input type="password" name="password" id="password" class="form-control form-control-sm" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid password.
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3">
-                <button type="submit" class="btn btn-sm btn-success">Signup</button>
-                <a href="/campgrounds" class="btn btn-sm btn-danger">cancel</a>
-
-            </div>
-        </form>
+                <div class="form-group mb-3">
+                    <button type="submit" class="btn btn-sm btn-success">Signup</button>
+                    <a href="/campgrounds" class="btn btn-sm btn-danger">cancel</a>
+    
+                </div>
+            </form>
+        </div>
     </div>
     <script src="../public/js/clientvalidation.js"></script>

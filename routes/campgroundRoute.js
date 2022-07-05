@@ -10,11 +10,19 @@ const upload = multer({ storage: storage })
 //rendering all campgrounds
 router.get("/",CatchAsync(camgroundController.index));
 
+router.get("/allCampgrounds",CatchAsync(camgroundController.allCampgrounds));
+
 router.route("/new")
     //rendering add new campground form 
     .get(isLoggedin,camgroundController.renderNewForm)
     //adding new campground to db
     .post(isLoggedin,upload.array('image'),CatchAsync(camgroundController.addNewCampground));
+
+router.route("/search")
+    .post(CatchAsync(camgroundController.search));
+
+
+
 
 router.route("/:id")
     //rendering campground details by id

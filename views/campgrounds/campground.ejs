@@ -4,33 +4,37 @@
 </script>
 <link rel="stylesheet" href="../public/style/campground.css">
 
-<div class="campground">
-    <span class="headingTag">All Campgrounds</span>
-        <div class="d-flex justify-content-between cardSection">
-            <% for (let camp of campgrounds) { %>
-                <div class="card col-md-4">
-                    <div class="row">
-                        <div class="col-md-4 m-auto p-4" >
-                            <img src="<%= camp.images[0].url %>" alt="<%= camp.name %>" style="width: 100%;">
-                        </div>
-                        <div class="col-md-8 p-4">
-                            <h2><%= camp.name %></h2>
-                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> <%= camp.location %></p>
-                            <p><% if (camp.description.length>200) { %>
-                                    <%= camp.description.substring(0,200) %>...
-                            <% } else {%>
-                                    <%= camp.description %>
-                            <% } %></p>
-                            </p>
-
-                            <a href="/campgrounds/<%= camp.id %>"><button class="btn btm-sm buttonInfo">More Info</button></a>
-                        </div>
+<div class="campground ">
+<br>
+    <center><div class="headingTag"> TOP <span class="red">CAMPGROUNDS</span>⛺</div></center>
+    <div class="row my-3 mx-0 justify-content-center">
+        <% i=0 %> 
+        <% for (let camp of campgrounds) { %>
+            <% if (i<10) { %>
+                <div class="card col-md-6 mx-2 my-3" >
+                    <% if(camp.images.length>0) {%> 
+                        <img src="<%= camp.images[0].url %>" alt="<%= camp.name %>" >
+                        <% } else {%>
+                        <img src="https://res.cloudinary.com/dupbox21b/image/upload/v1657031782/yelpcampAssets/no-image-available-vector-hand-260nw-745639717_an0gep.webp" alt="<%= camp.name %>" style="width: 100%;">
+                        <% } %>
+                    <div class="card-body">
+                        <h2><%= camp.name %> </h2>
+                                <p><i class="fa fa-map-marker" aria-hidden="true"></i> <%= camp.location %></p>
+                                <p><% if (camp.description.length>200) { %>
+        
+                                        <%= camp.description.substring(0,200) %>...
+                                <% } else {%>
+                                        <%= camp.description %>
+                                        
+                                <% } %></p>
+                                </p>
+                                <a href="/campgrounds/<%= camp.id %>"><button class="btn btm-sm buttonInfo">More Info</button></a>
                     </div>
                 </div>
-                <br>
-        <% } %>
-        </div>
-    
-    <!-- <a href="/campgrounds/new"" class="btn btn-lg mb-3 buttonAdd">Add new</a>-->
-</div>
+
+            <% i++ %>
+            <% } %> 
+    <% } %>
+
+    </div>
 </div>

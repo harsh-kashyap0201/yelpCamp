@@ -1,11 +1,18 @@
 const express=require("express");
 const router=express.Router();
-const CatchAsync = require("../utils/catchAsync");
+// const CatchAsync = require("../utils/catchAsync");
 const {isLoggedin,isAuthenticated} = require("../middleware");
 const camgroundController=require("../controllers/campground");
 const {storage}=require("../cloudinary/config");
 const multer  = require('multer')
 const upload = multer({ storage: storage })
+
+CatchAsync=()=>{
+    return(req,res,next)=>{
+        func(req,res,next).catch(next);
+    }
+};
+
 
 //rendering all campgrounds
 router.get("/",CatchAsync(camgroundController.index));

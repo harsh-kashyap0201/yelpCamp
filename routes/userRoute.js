@@ -1,13 +1,8 @@
 const express=require("express");
 const router=express.Router({mergeParams: true});
+const CatchAsync=require("../utils/catchAsync");
 const passport=require("passport");
 const userController=require("../controllers/user");
-
-CatchAsync=()=>{
-    return(req,res,next)=>{
-        func(req,res,next).catch(next);
-    }
-};
 
 //signup route
 router.route("/signup")

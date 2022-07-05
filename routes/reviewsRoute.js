@@ -1,6 +1,6 @@
 const express=require("express");
 const router=express.Router({mergeParams: true});
-const CatchAsync=require(".../utils/catchAsync");
+const CatchAsync=require("../utils/catchAsync");
 const {isLoggedin,isReviewAuthor} = require("../middleware");
 const reviewController=require("../controllers/review");
 

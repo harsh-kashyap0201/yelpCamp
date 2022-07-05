@@ -1,6 +1,6 @@
 const express=require("express");
 const router=express.Router();
-const CatchAsync = require(".../utils/catchAsync");
+const CatchAsync = require("../utils/catchAsync");
 const {isLoggedin,isAuthenticated} = require("../middleware");
 const camgroundController=require("../controllers/campground");
 const {storage}=require("../cloudinary/config");

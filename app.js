@@ -12,7 +12,6 @@ const ejsMate=require("ejs-mate");
 //method overide to handle patch delete request
 const methodOverride=require('method-override');
 //async wrapper function to handle async errors
-const CatchAsync=require('./utils/catchAsync');
 //handling errors
 const ExpressError=require('./utils/ExpressError');
 //session management

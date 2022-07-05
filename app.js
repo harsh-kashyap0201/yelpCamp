@@ -185,6 +185,7 @@ app.use((err,req,res,next)=>{
 })
 
 //listening to port 3000
-app.listen(3000,()=>{
-    console.log("server started");
+const port=process.env.PORT || 3000;
+app.listen(port,()=>{
+    console.log(`server started on https://localhost:${port}`);
 });

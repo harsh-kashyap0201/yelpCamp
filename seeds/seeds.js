@@ -36,7 +36,7 @@ const seedDb = async () => {
                 ],
                 description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero sint doloribus illum maiores iure repellat inventore magni labore deserunt expedita nobis est, consequuntur dignissimos distinctio officiis magnam numquam! Officiis, ut.`,
                 price: Math.floor(Math.random() * 100) + 1000,
-                author: "62bb448436cf0460cfd3cbc7",
+                author: "62c45a2f686093268eaf9201",
                 geometry:{
                     type: "Point",
                     coordinates: [

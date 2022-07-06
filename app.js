@@ -13,7 +13,7 @@ const ejsMate=require("ejs-mate");
 const methodOverride=require('method-override');
 //async wrapper function to handle async errors
 //handling errors
-const ExpressError=require('./utils/ExpressError');
+const ExpressError=require('./utils/expressError');
 //session management
 const session=require('express-session');
 //flash messages

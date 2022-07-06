@@ -5,9 +5,9 @@ const {
     descriptors,
     places
 } = require("./seedhelper.js");
-
+const SECRET_KEY=process.env.SECRET_KEY || "secret";
 mongoose
-    .connect("mongodb://localhost:27017/yelp_camp")
+    .connect(SECRET_KEY)
     .then(() => {
         console.log("Connected to DB");
     })

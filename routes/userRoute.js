@@ -1,6 +1,6 @@
 const express=require("express");
 const router=express.Router({mergeParams: true});
-const CatchAsync=require("../utils/CatchAsync");
+const CatchAsync=require("../utils/AsyncHandler");
 const passport=require("passport");
 const userController=require("../controllers/user");
 
